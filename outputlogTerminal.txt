@@ -1,0 +1,19 @@
+BEGIN TRAIN UNREDUCED MODE
+THE SENTENCE IS:  [CLS] The city name is Stockholm. [SEP]
+TOKENIED INTO:  ['[CLS]', 'The', 'city', 'name', 'is', 'Stockholm', '.', '[SEP]']
+NER PREDICTIONS ARE:  [['O', 'O', 'O', 'O', 'O', 'B-LOC', 'O', 'O']]
+THE SENTENCE IS:  [CLS] My name is MohamadrezaFaridGhasemnia. [SEP]
+TOKENIED INTO:  ['[CLS]', 'My', 'name', 'is', 'Mo', '##ham', '##ad', '##rez', '##a', '##F', '##ari', '##d', '##G', '##has', '##em', '##nia', '.', '[SEP]']
+NER PREDICTIONS ARE:  [['O', 'O', 'O', 'O', 'B-PER', 'I-PER', 'I-PER', 'I-PER', 'I-PER', 'I-PER', 'I-PER', 'I-PER', 'I-PER', 'I-PER', 'I-PER', 'I-PER', 'O', 'O']]
+BEGIN TRAIN REDUCED MODE
+THE SENTENCE IS:  [CLS] The city name is Stockholm. [SEP]
+TOKENIED INTO:  ['[CLS]', 'The', 'city', 'name', 'is', 'Stockholm', '.', '[SEP]']
+NER PREDICTIONS ARE:  [['O', 'O', 'O', 'O', 'O', 'B-LOC', 'O', 'O']]
+THE SENTENCE IS:  [CLS] My name is MohamadrezaFaridGhasemnia. [SEP]
+TOKENIED INTO:  ['[CLS]', 'My', 'name', 'is', 'Mo', '##ham', '##ad', '##rez', '##a', '##F', '##ari', '##d', '##G', '##has', '##em', '##nia', '.', '[SEP]']
+NER PREDICTIONS ARE:  [['O', 'O', 'O', 'O', 'B-PER', 'I-PER', 'I-PER', 'I-PER', 'I-PER', 'I-PER', 'I-PER', 'I-PER', 'I-PER', 'I-PER', 'I-PER', 'I-PER', 'O', 'O']]
+BEGIN EVAL UNREDUCED MODE
+{'ANIM': {'precision': 0.7137931034482758, 'recall': 0.7743142144638404, 'f1': 0.742822966507177, 'number': 3208}, 'BIO': {'precision': 0.5, 'recall': 0.875, 'f1': 0.6363636363636364, 'number': 16}, 'CEL': {'precision': 0.75, 'recall': 0.8048780487804879, 'f1': 0.7764705882352942, 'number': 82}, 'DIS': {'precision': 0.7329192546583851, 'recall': 0.7773386034255599, 'f1': 0.7544757033248083, 'number': 1518}, 'EVE': {'precision': 0.931129476584022, 'recall': 0.9602272727272727, 'f1': 0.9454545454545454, 'number': 704}, 'FOOD': {'precision': 0.6176470588235294, 'recall': 0.6678445229681979, 'f1': 0.6417657045840408, 'number': 1132}, 'INST': {'precision': 0.6, 'recall': 0.75, 'f1': 0.6666666666666665, 'number': 24}, 'LOC': {'precision': 0.9919428523963785, 'recall': 0.9931803060545575, 'f1': 0.9925611935336408, 'number': 24048}, 'MEDIA': {'precision': 0.9524838012958964, 'recall': 0.962882096069869, 'f1': 0.9576547231270359, 'number': 916}, 'MYTH': {'precision': 0.8181818181818182, 'recall': 0.84375, 'f1': 0.8307692307692308, 'number': 64}, 'ORG': {'precision': 0.9682063587282543, 'recall': 0.9755213055303718, 'f1': 0.9718500677404787, 'number': 6618}, 'PER': {'precision': 0.9888342165026495, 'recall': 0.9924026590693258, 'f1': 0.9906152241918664, 'number': 10530}, 'PLANT': {'precision': 0.624248496993988, 'recall': 0.6968680089485458, 'f1': 0.6585623678646935, 'number': 1788}, 'TIME': {'precision': 0.8133333333333334, 'recall': 0.8442906574394463, 'f1': 0.8285229202037351, 'number': 578}, 'VEHI': {'precision': 0.7428571428571429, 'recall': 0.8125, 'f1': 0.7761194029850748, 'number': 64}, 'overall_precision': 0.9338164806932782, 'overall_recall': 0.949619808929616, 'overall_f1': 0.9416518444049184, 'overall_accuracy': 0.9896722138174483}
+BEGIN EVAL REDUCED MODE
+{'ANIM': {'precision': 0.7173020527859237, 'recall': 0.7624688279301746, 'f1': 0.7391961317618615, 'number': 3208}, 'DIS': {'precision': 0.7429274292742928, 'recall': 0.7957839262187089, 'f1': 0.7684478371501272, 'number': 1518}, 'LOC': {'precision': 0.9923524522028263, 'recall': 0.9928476380572189, 'f1': 0.9925999833707492, 'number': 24048}, 'ORG': {'precision': 0.9717037928958459, 'recall': 0.9755213055303718, 'f1': 0.9736088071180818, 'number': 6618}, 'PER': {'precision': 0.9903409090909091, 'recall': 0.9931623931623932, 'f1': 0.9917496443812234, 'number': 10530}, 'overall_precision': 0.9599136069114471, 'overall_recall': 0.9678149906362963, 'overall_f1': 0.9638481056580859, 'overall_accuracy': 0.9938246524025647}
+finished!
