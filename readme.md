@@ -1,5 +1,5 @@
 
-# Named-Entity Recognition using BERT
+# Named-Entity Recognition using DistilBERT
 
 ## M. Farid.
 

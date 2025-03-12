@@ -1,65 +1,46 @@
 
-# Assignment: Research Engineer in Natural Language Processing
+# Named-Entity Recognition using DistilBERT
 
-## Mohamadreza Faridghasemnia
-
-
-
-## How to run the file
-You can run the file by running in terminal: python ner.py
-
-
-## Installing requirements
-You can install the requirements by pip install requirements.txt. 
-
-### Note 1 
-
-The detailed list of all installed packages are given in requiremenetsDetailed.txt. Note that there are other packages that are not used in this project, and installing with requirements.txt is preferred.
-
-## Note 2
-
-The requirements of GPU has be handled individually. This code is run on two 3090 GPU, with core-i9 cpu, with cuda version 11.4, and each epoch approximately took 20-30 minutes.
+## M. Farid.
 
 
 
-## Structure of files
-
-### Python files
-The main python file is the ner.py, which also calls the utils module. 
-
-### Folders 
-The two folders, "reduced_model" and "unreduced_model" corresponds to system-A and system-B of the assignmnet. In each folder, the tensorboard log, model, and training plots of tensorboard can be found. 
-
-### Files
-The terminal output of the code is recorded in outputlogTerminal.txt, and the two files of results_tags_reduced.txt, and results_tags_unreduced.txt represent the resultant evaluation of the two systems described in the assignment, particularly when tag sets are cutted, and when tag sets are complete, respectively. 
 
 
-# Further Notes
+# Description 
 
-**December 2023**  
+## 1 Problem definition
+Named Entity Recognition (NER) is one of the principal problems in NLP, which is the problem of classifying each token of a sentence into a set of predefined classes. 
 
-## 1 Main Outlines
+This is the implementation of MultiNERD Named Entity Recognition (NER) dataset in for English:
+1. Implmentation is based on a BERT model (DistilBERT), using HuggingFace.
+2. Non-English examples of the dataset are filtered out, and two case are compared with each other, Case A, and Case B.
+3. In case A (systemA), the model is trained on whole English subset of dataset. 
+4. In Case B (systemB), the model is trained to predict only five entity types: PERSON(PER), ORGANIZATION(ORG), LOCATION(LOC), DISEASES(DIS),
+ANIMAL(ANIM) (in addition to Null "O" tag).
 
-I discovered that systemB exhibits slightly better results in learning (almost all) five tags, leading to a better overall F1 score. However, it's important to note that the dataset has imbalanced labels, and systemB's performance may be influenced by pruning less-represented labels. Despite this, both models, including systemA, demonstrate good performance in Named Entity Recognition (NER), which is often considered a relatively simpler task for learning models, e.g., compared to translation. 
 
-SystemA’s results indicate that the model effectively handles imbalanced data, and I expect the performance difference with models like LSTM to be more pronounced. Notably, some tags in SystemA show lower accuracy, which can be rooted in at least two things:
+
+## 2 Main Outlines
+
+The systemB exhibits slightly better results in learning (almost all) five tags, leading to a better overall F1 score. However, it's important to note that the dataset has imbalanced labels, and systemB's performance may be influenced by pruning less-represented labels. Despite this, both models, including systemA, demonstrate good performance in Named Entity Recognition (NER), which is often considered a relatively simpler task for learning models, e.g., compared to translation. 
+
+SystemA’s results indicate that the model effectively handles imbalanced data, and it is expected that the performance difference with models like LSTM to be more pronounced. Notably, some tags in SystemA show lower accuracy, which can be rooted in at least two things:
 
 1. They are less-represented labels in the dataset; hence, the model learned them less, aligned with expectations of the nature of statistical models.
-2. I used the "cased" model of DistilBERT, which makes a difference between capitalized and lowercase words, ending in the tendency of the model in favor of recognizing capitalized names (e.g., often Person represented with capitalization) over uncapitalized ones. 
+2. The "cased" model of DistilBERT is, which makes a difference between capitalized and lowercase words, ending in the tendency of the model in favor of recognizing capitalized names (e.g., often Person represented with capitalization) over uncapitalized ones. 
 
 This observation is supported by examples with non-capitalized names, as well as lower F1 scores for labels that are commonly not capitalized.
 
 Additionally, addressing Out-Of-Vocabulary words, typically handled by feeding the split OOV tokens to transformers, offers room for improvement with alternative approaches. Further investigations can also be made with different models, experimenting with different hyperparameters, penalizing the loss function towards solving the imbalanced nature of data, and so on.
 
-## 2 Summary of Problem and Solution
+## 3 Summary of Solution
 
-Named Entity Recognition (NER) is one of the principal problems in NLP, which is the problem of classifying each token of a sentence into a set of predefined classes. This assignment concerned training and recognizing NER tags of sentences in the MultiNERD dataset. 
+The solution is implemented using TensorFlow GPU, two 3090 GPUs using Hugging Face DistilBERT model [(TensorFlow version)](https://huggingface.co/docs/transformers/model_doc/distilbert), which is a pre-trained knowledge-distilled BERT model. 
 
-I solved this problem with TensorFlow GPU, two 3090 GPUs using Hugging Face DistilBERT model [(TensorFlow version)](https://huggingface.co/docs/transformers/model_doc/distilbert), which is a pre-trained knowledge-distilled BERT model. The assignment required two systems to be implemented (systemA and systemB, also called unreduced tag and reduced tag models). 
+The solution includes a preprocessing step, training, and evaluation. The preprocessing steps include setting input and output in a proper Numpy-compatible shape and TensorFlow tensors while preserving the correspondence of tokenized words and labels. The training is done for seven epochs, with a 64 per-GPU batch size, which takes around two hours (a complete training of each model). 
 
-The solution includes a preprocessing step, training, and evaluation. The preprocessing steps include setting input and output in a proper rectangular shape that is compatible with NumPy arrays and TensorFlow tensors while preserving the correspondence of tokenized words and labels. The training is done for seven epochs, with a 64 per-GPU batch size, which takes around two hours (each model). 
-
-The evaluation is done using the `seqeval` library and concerns comparing the precision, recall, and F1 of each label and all labels together. Below are the results of the NER recognition over the test sets for both systems:
+The evaluation is done using the `seqeval` library and includes comparing the precision, recall, and F1 of each label and all labels together. Below are the results of the NER recognition over the test sets for both systems:
 
 ### Performance Comparison
 
@@ -84,3 +65,33 @@ The evaluation is done using the `seqeval` library and concerns comparing the pr
 
 **Table 1:** Precision, Recall, F1, and Number for SystemA and SystemB across different tags.
 
+
+
+
+# Structure of project
+You can run the file by running in terminal: python ner.py
+
+
+## Installing requirements
+You can install the requirements by pip install requirements.txt. 
+
+### Note 1 
+
+The detailed list of all installed packages are given in requiremenetsDetailed.txt. Note that there are other packages that are not used in this project, and installing with requirements.txt is preferred.
+
+## Note 2
+
+The requirements of GPU has be handled individually. This code is run on two 3090 GPU, with core-i9 cpu, with cuda version 11.4, and each epoch approximately takes 20-30 minutes.
+
+
+
+## Structure of files
+
+### Python files
+The main python file is the ner.py, which also calls the utils module. 
+
+### Folders 
+The two folders, "reduced_model" and "unreduced_model" corresponds to system-A and system-B. In each folder, the tensorboard log, model, and training plots of tensorboard can be found. 
+
+### Files
+The terminal output of the code is recorded in outputlogTerminal.txt, and the two files of results_tags_reduced.txt, and results_tags_unreduced.txt represent the resultant evaluation of the two systems, respectively. 
